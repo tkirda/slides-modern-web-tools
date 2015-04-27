@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Modern Frontend Tooling</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/monokai.css" id="highlight-theme">
+
+		<style type="text/css">
+			.reveal .transform-none { text-transform: none; }
+			.reveal section img { background:none; border:none; box-shadow:none; }
+			.no-wrap { white-space: nowrap; }
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Modern <br /> Frontend <br /> Tooling</h1>
+					<p>
+						<small>Tomas Kirda / <a href="http://twitter.com/tkirda">@tkirda</a></small>
+						<br />
+						<small>Software Engineer / <a href="http://twitter.com/tkirda">@devbridge</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Development Lifecycle</h3>
+					<div>
+						<img src="resources/images/development-lifecycle.png" alt="" width="550" />
+					</div>
+				</section>
+
+				<section>
+					<div>
+						<img src="resources/images/jake-weary.png" alt="" width="100%" />
+					</div>
+				</section>
+
+				<section>
+					<h2>NodeJS</h2>
+					<div>
+						<img src="resources/images/node-js.png" alt="NodeJS Logo" width="400" />
+					</div>
+					<p>https://nodejs.org</p>
+				</section>
+
+				<section>
+					<h3>JavaScript Server Side</h3>
+					<p>Platform built on Chrome's V8 engine</p>
+				</section>
+
+				<section data-transition="fade">
+					<img src="resources/images/v8-kompressor.jpg" alt="NodeJS Logo" width="80%" />
+				</section>
+
+				<section data-transition="fade">
+					<img src="resources/images/v8-google.jpg" alt="NodeJS Logo" width="80%" />					
+				</section>
+
+				<section>
+					<section>
+						<h2>NPM</h2>
+						<div>
+							<img src="resources/images/npm.png" alt="NPM Logo" width="400" />
+						</div>
+						<p><small>https://www.npmjs.com</small></p>
+					</section>
+
+					<section>
+						<h2>Package Manager<br /> for Node</h2>
+					</section>
+
+					<section>
+						<h2>package.json</h2>
+						<pre>
+
+	{
+	  "name": "foo",
+	  "version": "0.1.0",
+	  "description": "foo description",
+	  "main": "foo.js",
+	  "author": "@somebody",
+	  "license": "MIT"
+	}
+						</pre>
+						<p class="fragment">Most important: name and version</p>
+					</section>
+
+					<section>
+						<h2>Versioning</h2>
+					</section>
+
+					<section>
+						<h2>Semantic Versioning</h2>
+						<div>
+							<img src="resources/images/semver.png" alt="Semantic Versioning" />
+						</div>
+						<p>http://semver.org</p>
+					</section>
+
+					<section>
+						<h2>MAJOR.MINOR.PATCH</h2>
+						<ol>
+							<li class="fragment">MAJOR - incompatible API changes</li>
+							<li class="fragment">MINOR - backwards-compatible + new functionality</li>
+							<li class="fragment">PATCH - backwards-compatible + bug fixes</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Dependencies</h2>
+						<pre>
+
+    {
+        "name": "foo",
+        "version": "0.1.0",
+
+        "dependencies": {
+            "lodash": ">=2.4.1",
+            "d3": "^3.5.5"
+        },
+
+        "devDependencies": {
+            "chai": "^2.2.0",
+            "gulp": "^3.8.11",
+            "gulp-karma": "0.0.4",
+            "karma": "^0.12.31",
+            "mocha": "^2.2.4"
+        }
+    }
+    						</pre>
+					</section>
+
+                    <section>
+                        <pre>
+
+    # app dependency
+    npm install lodash --save
+
+    # dev dependency
+    npm install chai --save-dev
+                        </pre>
+                    </section>
+
+					<section>
+						<p>All valid versions:</p>
+						<pre>
+
+  {
+        &quot;foo&quot;: &quot;1.0.0 - 2.9999.9999&quot;,
+        &quot;bar&quot;: &quot;&gt;=1.0.2 &lt;2.1.2&quot;,
+        &quot;baz&quot;: &quot;&gt;1.0.2 &lt;=2.3.4&quot;,
+        &quot;boo&quot;: &quot;2.0.1&quot;,
+        &quot;qux&quot;: &quot;&lt;1.0.0 || &gt;=2.3.1 &lt;2.4.5 || &gt;=2.5.2 &lt;3.0.0&quot;,
+        &quot;asd&quot;: &quot;http://asdf.com/asdf.tar.gz&quot;,
+        &quot;til&quot;: &quot;~1.2&quot;,
+        &quot;elf&quot;: &quot;~1.2.3&quot;,
+        &quot;two&quot;: &quot;2.x&quot;,
+        &quot;thr&quot;: &quot;3.3.x&quot;,
+        &quot;lat&quot;: &quot;latest&quot;,
+        &quot;dyl&quot;: &quot;file:../dyl&quot;
+  }
+						</pre>
+					</section>
+
+					<section>
+						<h2>CLI Commands</h2>
+						<pre>
+
+    #list installed packages
+    npm ls
+
+    #list outdated packages
+    npm outdated
+
+    #remove package
+    npm rm &lt;name&gt;
+						</pre>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Bower</h2>
+						<div>
+							<img src="resources/images/bower.png" alt="Bower Logo" width="250" />
+						</div>
+						<p><small>http://bower.io</small></p>
+					</section>
+
+					<section>
+						<h2>Package Manager <br /> for the Web</h2>
+					</section>
+
+					<section>
+						<h2>bower.json</h2>
+						<p>Manifest file similar to NPM's package.json</p>
+					</section>
+
+					<section>
+						<pre>
+
+  {
+    &quot;name&quot;: &quot;my-project&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;main&quot;: &quot;path/to/main.css&quot;,
+    &quot;ignore&quot;: [
+      &quot;.jshintrc&quot;,
+      &quot;**/*.txt&quot;
+    ],
+    &quot;dependencies&quot;: {
+      &quot;&lt;name&gt;&quot;: &quot;&lt;version&gt;&quot;,
+      &quot;&lt;name&gt;&quot;: &quot;&lt;folder&gt;&quot;,
+      &quot;&lt;name&gt;&quot;: &quot;&lt;package&gt;&quot;
+    },
+    &quot;devDependencies&quot;: {
+      &quot;&lt;test-framework-name&gt;&quot;: &quot;&lt;version&gt;&quot;
+    }
+  }
+ 						</pre>
+					</section>
+
+					<section>
+						<h2 class="transform-none">.bowerrc</h2>
+						<p>Bower configuration JSON file</p>
+						<pre>
+
+  {
+    &quot;directory&quot;: &quot;app/components/&quot;,
+    &quot;analytics&quot;: false,
+    &quot;timeout&quot;: 120000
+  }
+						</pre>
+						<p class="reveal">Default: bower_components</p>
+					</section>
+
+					<section>
+						<h2>List Packages</h2>
+						<pre>
+
+	bower list
+						</pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>Task Automation</h2>
+					<div>
+						<img src="resources/images/grunt-gulp.png" alt="Grunt Gulp Brunch Logos" />
+					</div>
+				</section>
+
+				<section>
+					<section>
+						<h2>Grunt</h2>
+						<div>
+							<img src="resources/images/grunt.png" alt="Grunt Logo" width="300" />
+						</div>
+						<p><small>http://gruntjs.com</small></p>
+					</section>
+
+					<section>
+						<h3>JavaScript Task Runner</h3>
+						<p>Configuration Based</p>
+					</section>
+
+					<section>
+						<h2>Install CLI</h2>
+						<pre>
+
+	npm install -g grunt-cli
+
+	grunt --version
+						</pre>
+					</section>
+
+					<section>
+						<h2>In Your Project</h2>
+						<pre>
+
+	npm install grunt --save-dev
+						</pre>
+					</section>
+
+					<section>
+						<h2>Gruntfile.js</h2>
+						<pre><code>
+  module.exports = function (grunt) {
+    // create 'version' custom task
+    grunt.registerTask('version', 'Shows version number', function () {
+        var pkg = grunt.file.readJSON('package.json');
+        grunt.log.writeln(pkg.name + ' version ' + pkg.version);
+    });
+  };
+						</code></pre>
+
+						<pre>
+	
+	grunt version
+						</pre>
+					</section>
+
+					<section>
+						<h2>Grunt Plugins</h2>
+						<pre>
+						
+	npm install --save-dev grunt-contrib-jshint
+						</pre>
+						<pre><code>
+  module.exports = function (grunt) {
+    // load plugin tasks
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+
+    // tasks configuration
+    grunt.initConfig({
+      jshint: {
+        files: ['Gruntfile.js'], // files to run JSHint on
+        options: { // options for JShint
+          globals: { module: true } // allow the use of 'module' global
+        }
+      }
+    });
+  };
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Gulp</h2>
+						<div>
+							<img src="resources/images/gulp.png" alt="Gulp Logo" width="150" />
+						</div>
+						<p><small>http://gulpjs.com</small></p>
+					</section>
+
+					<section>
+						<h2>Streaming Build System</h2>
+						<p>Uses NodeJS streams, thereby removing the need to create intermediate files when transforming source files</p>
+					</section>
+
+					<section>
+						<h2>Install CLI</h2>
+						<pre>
+						
+	npm install -g gulp
+						</pre>
+					</section>
+
+					<section>
+						<h2>In Your Project</h2>
+						<pre>
+
+	npm install gulp --save-dev
+						</pre>
+					</section>
+
+					<section>
+						<h2>gulpfile.js</h2>
+						<pre><code>
+  var gulp =  require('gulp')
+  var concat = require('gulp-concat');
+   
+  gulp.task('concat', function() {
+    return gulp.src('./src/js/*.js')
+      .pipe(concat('all.js'))
+      .pipe(gulp.dest('./dist/'));
+  });
+  						</code></pre>
+					</section>
+
+					<section>
+						<h2>Gulp API</h2>
+						<pre>
+
+	gulp.src   (globs[, options]);
+	gulp.dest  (path[, options]);
+	gulp.task  (name[, deps], fn);
+	gulp.watch (glob[, opts], tasks);
+						</pre>
+					</section>
+
+					<section>
+						<p>The .pipe() is how we connect <br />single-purpose plugins together</p>
+						<pre>
+
+  gulp.src('patern/*')
+          .pipe(...)
+          .pipe(...)
+          .pipe(...);   
+   						</pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>Code Quality</h2>
+				</section>
+
+				<section>
+					<section>
+						<h2>Testing</h2>
+					</section>
+
+					<section>
+						<h2>Karma</h2>
+						<p>Test Runner</p>
+						<div>
+							<img src="resources/images/karma.png" alt="Karma Logo" width="300" />
+						</div>
+						<p><small>https://karma-runner.github.io</small></p>
+					</section>
+
+					<section>
+						<p>Write the code and get instant feedback from your tests</p>
+						<ul>
+							<li>Test on Real Browsers</li>
+							<li>Continuous Integration</li>
+							<li>Testing Framework Agnostic</li>
+							<li>Easy Debugging</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Karma<br /> in Action</h2>
+					</section>
+
+					<section>
+						<h2>Code Coverage</h2>
+					</section>
+
+					<section>
+						<h2>Istanbul</h2>
+						<p>JavaScript code coverage tool</p>
+						<p>http://istanbul-js.org</p>
+					</section>
+
+					<section>
+						<h2>COVERAGE PER</h2>
+						<ul>
+							<li>statement</li>
+							<li>branch</li>
+							<li>function</li>
+						</ul>
+						<p>Based on esprima</p>
+					</section>
+
+					<section>
+						<h3>Istanbul in Action</h3>
+					</section>
+				</section>
+
+				<section>
+					<h2>Code Linting</h2>
+					<p>JSHINT / JSLINT / ESLINT</p>
+					<p>Detects errors and potential problems</p>
+				</section>
+
+				<section>
+					<h2>Used by</h2>
+					<ul>
+						<li>Mozilla</li>
+						<li>Wikipedia</li>
+						<li>Facebook</li>
+						<li>Twitter</li>
+						<li>Bootstrap</li>
+						<li>Disqus</li>
+						<li>Medium</li>
+						<li>Yahoo!</li>
+						<li>jQuery</li>
+						<li>RedHat</li>
+						<li>...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Code Style</h2>
+					<div>
+						<img src="resources/images/jscs.png" alt="JSCS Logo" width="300" height="300" />
+					</div>
+					<p>http://jscs.info</p>
+				</section>
+
+				<section>
+					<h2>Enforce Style Programmatically</h2>
+					<p>Over 90 validation rules</p>
+					<p>.jscsrc</p>
+				</section>
+
+				<section>
+					<h2>Plato</h2>
+					<p>JavaScript source code visualization, static analysis, and complexity tool</p>
+					<a href="https://github.com/es-analysis/plato" target="_blank">https://github.com/es-analysis/plato</a>
+				</section>
+
+				<section>
+					<h2>Yeoman</h2>
+					<div>
+						<img src="resources/images/yeoman.png" alt="Yeoman Logo" height="400" />
+					</div>
+				</section>
+
+				<section>
+					<h2>Prerequisites</h2>
+					<ul>
+						<li>NodeJS</li>
+						<li>NPM</li>
+						<li>Git</li>
+						<li>Bower</li>
+						<li>Grunt</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Install CLI</h2>
+					<pre>
+
+	npm install -g yo
+					</pre>
+				</section>
+
+				<section>
+					<h2>1000+ generators</h2>
+					<ol>
+						<li class="no-wrap">Install generator</li>
+						<li class="no-wrap">Create directory</li>
+						<li class="no-wrap">Scaffold project</li>
+					</ol>
+					<pre>
+
+	npm install generator-angular --global
+	mkdir myapp
+	cd myapp
+	yo angular
+					</pre>	
+					<p>Start the server</p>		
+					<pre>
+
+	grunt serve
+					</pre>		
+				</section>
+
+				<section>
+					<h2>In Action</h2>
+					<div>
+						<img src="resources/images/yeoman-in-action.png" alt="Yeoman Logo" width="5	00" />
+					</div>
+				</section>
+
+				<section>
+					<h2>Thank You</h2>
+				</section>
+
+				<section>
+					<div>
+						<img src="resources/images/devbridge-logo.png" alt="Devbridge Group Logo" width="600" />
+					</div>
+					<div>
+						<img src="resources/images/sourcery.png" alt="Sourcery" width="600" />
+					</div>
+					<p><small>www.devbridge.com/sourcery/academy</small></p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
